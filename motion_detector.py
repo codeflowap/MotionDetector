@@ -9,6 +9,7 @@ while True:
     check, frame = video.read()
     
     gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtGussianBlur(gray,(21,21),0) 
 
     if first_frame is None
         first_frame = gray
