@@ -16,12 +16,15 @@ while True:
         continue
 
     delta_frame = cv2.absdiff(background,gray)
-
     # Assigns 255 color to pixles in delta_frame where diff is more than 30 intensity
     thresh_frame = cv2.threshold(delta_frame, 30, 255, cv2.THRESH_BINARY)[1]
-
     # Smooth threshold frame
     thresh_frame = cv2.dilate(thresh_frame, None, iterations=2)
+
+    # Find counters
+    (_,cnts,_) = cv2.findCountours(thresh_frame.copy(),cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    
     
     cv2.imshow("Captured",gray)
     cv2.imshow("Difference",delta_frame)
